@@ -2,29 +2,39 @@
 <html lang='eng'>
 <head>
 	<meta charset="UTF-8">
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<title>Galactic Hangman</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
-
 	<body>
+	<img src = "assets/images/galacticheader.jpg" alt = "Hangman">
+
+<div id="game">
+	<h1> Welcome to Galactic Hangman!</h1>
+	<p>Press any key to get started.</p>
+	<div id="word"></div>
+</div>
+
 	<script type="text/javascript">
 		var possibleWord = ['galaxy', 'nebula', 'comet', 'supernova', 'satellite', 'orbit', 'asteroid', 'meteor'];
 		var selectedWord = 0;
-		var selectedLetters = [];
+		var selectedLetters = [' '];
 		var usedList = 0;
 		var lives = 7;
 		var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 		var lettersToShow = [];
 		var usedLetter = [];
-		var playerPrompt = "Press any key to get started.";
+		var userGuess = 0;
+		var isaLetter = [];
+		var foundLetters = [];
+		var wordLength = [];
+		var guessesRemaining = 7;
+
 
 		//randomly selecting word
 		var selectedWord = possibleWord[Math.floor(Math.random() * possibleWord.length)];
 		console.log (selectedWord);
-
-
 
 		document.onkeyup = function(event) {
 		var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
@@ -48,25 +58,33 @@
 	    	for (var i = 0; i < selectedLetters.length; i++) {
 	    		if (userGuess == selectedLetters[i]) {
 	    			alert ("That letter has already been chosen.")
+	    			lives++;
 	    			letterFlag = 1;
 	    		} 
 	      	}
+
 	      	if (letterFlag == 0) {
 	    			selectedLetters[selectedLetters.length + 1] = userGuess; 		 
 	      	}
-	    }
 
 	    	//test if the letter is in the word
        		if (selectedWord.indexOf(userGuess) >= 0) {
-    		 	console.log (selectedWord.indexOf(userGuess));}
+    		 	console.log (selectedWord.indexOf(userGuess));
+    		 	}
+
     		else {
     			lives--;
-    			console.log (userGuess + "Wrong Guess. "  + lives + "Lives left.");
-    		}
+    			console.log (userGuess + " Wrong Guess. "  + lives + " lives left.");
+    			}
+    		}	
+
+    		//display the correct letters in the word
+			document.getElementById("word").innerHTML = userGuess;
 
     		//check to see if user has lost
 			if (lives == 0) {
 				console.log ("You lose.");
+				alert ("You lose.  The word was: " + selectedWord)
 			}
 
 			//check to see if all letter have been picked
@@ -79,16 +97,11 @@
 
 			if (correctLetters == selectedWord.length) {
 				console.log ("You win!");
+				alert ("You win!");
 			}
- 	    }
-		//document.querySelector('#game').innerHTML = playerPrompt;
-		
+ 	  }
 	</script>
-	<div id="game">
-	<h1> Welcome to Galactic Hangman!</h1>
-	<p>Press any key to get started.</p>
-
-	</div>
+	
 </body>
 
 </html>

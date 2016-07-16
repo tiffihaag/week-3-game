@@ -1,8 +1,20 @@
 .showLetter {
-	color: black
+	color: black;
+	display: inline;
+	font-size: 22px;
+	font-style: underline;
 }
 
 
 .usedLetter {
-	
+	visibility: show;
+	height: 500px;
 }
+
+.selectedWord {
+	visibility: hidden;
+}
+
+h1
+font-style: center;
+
